@@ -16,7 +16,7 @@ export default function HomeScreen() {
   }, [message]);
   const addTodo = () => {
     if(!inputData){
-      setMessage('Please enter task');
+      setMessage('Please enter task!.');
       return;
     }
     setTodos((prev) => [...prev, { key: Date.now().toString(), data: inputData }]);
