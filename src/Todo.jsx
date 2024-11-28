@@ -29,28 +29,42 @@ export default function Todo() {
   };
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedText style={styles.title} type="title">BlinkSwag</ThemedText>
+    headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+    headerImage={
+      <Image
+        source={require('@/assets/images/logo.png')}
+        style={styles.reactLogo}
+      />
+    }>
+    <View style={styles.titleContainer}>
+      <Text style={styles.title}>Welcome!</Text>
+      <HelloWave />
+      {/* <Text style={styles.title}>BlinkSwag</Text> */}
       <View>
-        <TextInput style={styles.input} placeholder='Enter your task' value={inputData} onChange={(e) => setInputData(e.target.value)} />
-        <Button title='Add' onPress={addTodo} />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your task"
+          value={inputData}
+          onChangeText={setInputData} // Use `onChangeText`
+        />
+        <Button title="Add" onPress={addTodo} />
         <Text>{message}</Text>
       </View>
-      <View>
-        <FlatList data={todos} renderItem={todo => <TouchableOpacity onPress={removeTodo.bind(this, todo.item.key)}><Text style={styles.listItem}>{todo?.item?.data}</Text></TouchableOpacity>} />
-      </View>
-
-    </ParallaxScrollView>
+    </View>
+  
+    {/* FlatList with scrolling disabled */}
+    <FlatList
+      data={todos}
+      renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => removeTodo(item.key)}>
+          <Text style={styles.listItem}>{item.data}</Text>
+        </TouchableOpacity>
+      )}
+      keyExtractor={(item) => item.key}
+      scrollEnabled={false} // Prevent FlatList from scrolling
+    />
+  </ParallaxScrollView>
+  
   );
 }
 
