@@ -3,20 +3,26 @@ import { View, Text, Image, StyleSheet, Dimensions, ScrollView, TouchableOpacity
 import { createStackNavigator } from '@react-navigation/stack';
 import { LineChart } from 'react-native-chart-kit';
 import { Calendar } from 'react-native-calendars';
+import { useDispatch } from 'react-redux';
+import Header from '../../components/header/Header';
+import TopBar from '../../components/header/TopBar';
 const Stack = createStackNavigator();
 const HomeScreen = ({ navigation }) => {
     const [selectedDate, setSelectedDate] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const onDayPress = (day) => {
-        setSelectedDate(day.dateString); // Store the selected date
+        setSelectedDate(day.dateString);
     };
+
     const screenWidth = Dimensions.get('window').width;
     const chartData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
         datasets: [
             {
-                data: [50, 80, 90, 100, 150, 200], // Example data
-                strokeWidth: 2, // Line thickness
+                data: [50, 80, 90, 100, 150, 200],
+                strokeWidth: 2,
             },
         ],
     };
@@ -210,6 +216,7 @@ const HomeScreen = ({ navigation }) => {
     );
     return (
         <>
+            <TopBar />
             <ScrollView>
                 <Text style={styles.text}>Welcome Ravi!</Text>
 
@@ -420,48 +427,48 @@ const styles = StyleSheet.create({
     activeCard: {
         borderWidth: 2,
         borderColor: '#4caf50',
-      },
-      inactiveCard: {
+    },
+    inactiveCard: {
         borderWidth: 2,
         borderColor: '#f44336',
-      },
-      statusContainer: {
+    },
+    statusContainer: {
         paddingHorizontal: 8,
         paddingVertical: 1,
         borderRadius: 5,
         alignSelf: 'flex-start',
         marginTop: 1,
         marginLeft: 1,
-      },
-      status: {
+    },
+    status: {
         fontSize: 12,
         fontWeight: 'bold',
-      },
-      activeStatus: {
+    },
+    activeStatus: {
         color: '#4caf50',
-      },
-      inactiveStatus: {
+    },
+    inactiveStatus: {
         color: '#f44336',
-      },
-      title: {
+    },
+    title: {
         fontSize: 16,
         fontWeight: '600',
         marginHorizontal: 10,
         marginTop: 10,
-      },
-      subtitle: {
+    },
+    subtitle: {
         fontSize: 14,
         color: '#757575',
         marginHorizontal: 10,
         marginTop: 4,
-      },
-      daysAgo: {
+    },
+    daysAgo: {
         fontSize: 12,
         color: '#9e9e9e',
         marginHorizontal: 10,
         marginTop: 4,
         marginBottom: 10,
-      },
+    },
 });
 
 export default HomeScreen;
