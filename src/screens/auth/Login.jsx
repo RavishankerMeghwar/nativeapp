@@ -163,7 +163,7 @@ export default function LoginScreen({ navigation }) {
       }
       setIsLoading(true);
     }
-    axios.post(base_url + 'users/authenticate', data)
+    axios.post(base_url + 'auth.php?action=login', data)
       .then(res => {
         let data = {
           data: res?.data?.user,

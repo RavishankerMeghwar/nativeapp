@@ -1,1 +1,1 @@
-export const base_url ='https://api-dashboard-dev.blinkswag.com/api/';
+export const base_url ='http://localhost/e-api/';
